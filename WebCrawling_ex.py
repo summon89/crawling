@@ -63,5 +63,34 @@ response = urllib.request.urlopen("https://www.naver.com/")
 response.close()
 
 
+# request 라이브러리로 크롤링
+import requests
+url = "https://www.naver.com"
+params = {"params" : "value"}
+headers = {"User-Agent" : "value"}
+
+resp = requests.get(url, params=params, headers=headers)
+print(resp.url)
 
 
+
+import os
+import sys
+import requests
+client_id = "dJsqk0KKe09r96JVIED_"
+client_secret = "k470yOu6IT"
+# url = "https://openapi.naver.com/v1/vision/face" # 얼굴감지
+url = "https://openapi.naver.com/v1/vision/celebrity" # 유명인 얼굴인식
+files = {'image': open('crawling/10222001.jpg', 'rb')}
+# files = {'image': open('crawling/ceo.jpg', 'rb')}
+headers = {'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
+response = requests.post(url,  files=files, headers=headers)
+print(response)
+rescode = response.status_code
+if(rescode==200):
+    print (response.text)
+else:
+    print("Error Code:", rescode)
+
+## 네이버 콜라보 서비스를 활용
+# https://developers.naver.com/docs/common/openapiguide/apilist.md#clova-face-recognition
